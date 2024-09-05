@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Patient Report -->
+        <record id="report_patient" model="ir.actions.report">
+            <field name="name">Patient Report</field>
+            <field name="model">hms.patient</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="template">hms.report_patient_template</field>
+            <field name="report_name">patient_report</field>
+        </record>
+
+        <!-- Patient Report Template -->
+        <template id="report_patient_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="patient">
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <!-- Patient Data (Left Side) -->
+                                <h2>Patient Information</h2>
+                                <p><strong>Name:</strong> <span t-esc="patient.name"/></p>
+                                <p><strong>Department:</strong> <span t-esc="patient.department_id.name"/></p>
+                                <p><strong>Doctor:</strong> <span t-esc="patient.doctor_id.name"/></p>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Patient Image (Right Side) -->
+                                <img t-att-src="'/web/image/hms.patient/' + patient.id + '/image'" style="width: 100%; height: 150px;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Patient Data (Below Image) -->
+                                <h2>Patient Details</h2>
+                                <p><strong>Date of Birth:</strong> <span t-esc="patient.date_of_birth"/></p>
+                                <p><strong>Address:</strong> <span t-esc="patient.address"/></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Patient Logs History (Bottom) -->
+                                <h2>Patient Logs History</h2>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Log</th>
+                                    </tr>
+                                    <t t-foreach="patient.log_ids" t-as="log">
+                                        <tr>
+                                            <td><span t-esc="log.date"/></td>
+                                            <td><span t-esc="log.log"/></td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

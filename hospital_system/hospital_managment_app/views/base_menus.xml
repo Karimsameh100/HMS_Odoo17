@@ -1,0 +1,23 @@
+<odoo>
+<!--    <data noupdate="1">-->
+        <menuitem id="menu_hms"
+                  name="HMS Hospital"
+                  web_icon="hospital_managment_app,static/description/new_hms.png"
+        />
+
+        <menuitem id="menu_root_patients"
+                  name="Patients"
+                  parent="menu_hms"
+        />
+
+        <menuitem id="menu_root_doctor"
+                  name="Doctors"
+                  parent="menu_hms"
+        />
+
+        <menuitem id="menu_root_department"
+                  name="Departments"
+                  parent="menu_hms"
+        />
+<!--    </data>-->
+</odoo>
